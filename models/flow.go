@@ -6,6 +6,8 @@ type Flow struct {
 	Version     string `json:"version,omitempty"`
 	Author      string `json:"author,omitempty"`
 
+	FlowVersion string `json:"flow_version"`
+
 	Inputs []Input
-	Tasks  []Task
+	Steps  []Step
 }
