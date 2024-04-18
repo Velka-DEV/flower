@@ -9,5 +9,6 @@ type Input struct {
 	Options     []string `json:"options,omitempty"`
 
 	// The input's value
-	Value string
+	Value         interface{} `json:"value,omitempty"`
+	ValueTemplate string      `json:"value_template,omitempty"`
 }

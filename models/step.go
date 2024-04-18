@@ -1,10 +1,9 @@
 package models
 
 type Step struct {
-	Name        string `json:"name"`
-	Description string `json:"description,omitempty"`
-	Type        string `json:"type"`
+	Name   string `json:"name"`
+	Type   string `json:"type"`
+	Action string `json:"action"`
 
-	Inputs  []Input
-	Outputs []Output
+	Inputs map[string]interface{} `json:"inputs"`
 }

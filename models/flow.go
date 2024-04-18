@@ -8,6 +8,6 @@ type Flow struct {
 
 	FlowVersion string `json:"flow_version"`
 
-	Inputs []Input
+	Inputs map[string]interface{} `json:"inputs"`
 	Steps  []Step
 }

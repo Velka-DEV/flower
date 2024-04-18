@@ -1,0 +1,29 @@
+name: Test Flow
+description: Testing object to yaml export
+version: 0.0.1
+author: Flower
+flow_version: 0.0.1
+inputs:
+- name: Test Input
+  description: Testing input
+  type: string
+  required: true
+  default: default
+  options:
+  - option1
+  - option2
+  value: value
+steps:
+- name: Test Step
+  type: test
+  action: request/http
+  inputs:
+  - name: Test Input
+    description: Testing input
+    type: string
+    required: true
+    default: default
+    options:
+    - option1
+    - option2
+    value: value
