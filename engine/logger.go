@@ -25,5 +25,37 @@ type Logger interface {
 }
 
 type DefaultLogger struct {
-	logs []Log
+	logs        []Log
+	executionId string
+}
+
+func NewDefaultLogger(executionId string) *DefaultLogger {
+	return &DefaultLogger{
+		logs:        []Log{},
+		executionId: executionId,
+	}
+}
+
+func (l *DefaultLogger) Log(level LogLevel, message string, args ...interface{}) {
+	l.logs = append(l.logs, Log{
+		Level:       level,
+		Message:     message,
+		ExecutionID: l.executionId,
+	})
+}
+
+func (l *DefaultLogger) Debug(message string, args ...interface{}) {
+	l.Log(LogLevelDebug, message, args...)
+}
+
+func (l *DefaultLogger) Info(message string, args ...interface{}) {
+	l.Log(LogLevelInfo, message, args...)
+}
+
+func (l *DefaultLogger) Warn(message string, args ...interface{}) {
+	l.Log(LogLevelWarn, message, args...)
+}
+
+func (l *DefaultLogger) Error(message string, args ...interface{}) {
+	l.Log(LogLevelError, message, args...)
 }

@@ -1,20 +1,40 @@
 package engine
 
+import (
+	"flower/models"
+	"github.com/google/uuid"
+	"time"
+)
+
 // Context represents the context of the flow execution and is passed to the actions (shared context between actions)
 type Context struct {
 	ExecutionID string
+	Inputs      map[string]string
+	Logger      Logger
 
-	Inputs  map[string]string
-	Outputs map[string]string
+	startTime time.Time
+	endTime   time.Time
 
-	Logger Logger
+	flow        *models.Flow
+	stepOutputs map[string]interface{}
 }
 
-func NewContext(executionID, flowName, flowVersion string, inputs map[string]string, logger Logger) *Context {
+func NewContext(flow *models.Flow) *Context {
+	id, _ := uuid.NewUUID()
+
 	return &Context{
-		ExecutionID: executionID,
-		Inputs:      inputs,
-		Outputs:     make(map[string]string),
-		Logger:      logger,
+		ExecutionID: id.String(),
+		Inputs:      make(map[string]string),
+		flow:        flow,
+		Logger:      NewDefaultLogger(id.String()),
 	}
+}
+
+func (c *Context) SetOutput(name string, value interface{}) {
+	c.stepOutputs[name] = value
+}
+
+func (c *Context) GetOutput(name string) (interface{}, bool) {
+	value, ok := c.stepOutputs[name]
+	return value, ok
 }

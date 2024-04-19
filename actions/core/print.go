@@ -1,10 +1,11 @@
 package core
 
 import (
-	"flower/engine"
 	"flower/models"
 	"fmt"
 )
+
+const PrintActionIdentifier = "core/test/print"
 
 var printInputSchema = []models.Input{
 	{
@@ -15,6 +16,10 @@ var printInputSchema = []models.Input{
 }
 
 type PrintAction struct {
+}
+
+func (a *PrintAction) GetIdentifier() string {
+	return PrintActionIdentifier
 }
 
 func (a *PrintAction) GetInputSchema() []models.Input {
@@ -39,7 +44,7 @@ func (a *PrintAction) Validate(inputs map[string]interface{}) error {
 	return nil
 }
 
-func (a *PrintAction) Execute(ctx *engine.Context, inputs map[string]interface{}) ([]models.Output, error) {
+func (a *PrintAction) Execute(ctx models.Context, inputs map[string]interface{}) ([]models.Output, error) {
 	message := inputs["message"].(string)
 	fmt.Println(message)
 

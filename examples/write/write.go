@@ -14,25 +14,21 @@ func main() {
 		Author:      "Flower",
 		FlowVersion: "0.0.1",
 		Inputs: map[string]interface{}{
-			"test":  "Testing input",
-			"test2": "Testing input 2",
+			"test_string": "Hello, world!",
+			"test_int":    42,
+			"test_bool":   true,
+			"test_array":  []string{"a", "b", "c"},
+			"test_object": map[string]interface{}{
+				"key": "value",
+			},
 		},
 		Steps: []models.Step{
-			models.Step{
-				Name:   "Test Step",
-				Type:   "test",
-				Action: "request/http",
+			{
+				Name:   "Test print",
+				Action: "core/test/print",
 
-				Inputs: []models.Input{
-					models.Input{
-						Name:        "Test Input",
-						Description: "Testing input",
-						Type:        "string",
-						Required:    true,
-						Default:     "default",
-						Options:     []string{"option1", "option2"},
-						Value:       "value",
-					},
+				Inputs: map[string]interface{}{
+					"message": "Hello, world!",
 				},
 			},
 		},

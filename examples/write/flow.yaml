@@ -1,0 +1,20 @@
+name: Test Flow
+description: Testing object to yaml export
+version: 0.0.1
+author: Flower
+flow_version: 0.0.1
+inputs:
+  test_array:
+  - a
+  - b
+  - c
+  test_bool: true
+  test_int: 42
+  test_object:
+    key: value
+  test_string: Hello, world!
+steps:
+- name: Test print
+  action: core/test/print
+  inputs:
+    message: Hello, world!
