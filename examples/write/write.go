@@ -13,16 +13,9 @@ func main() {
 		Version:     "0.0.1",
 		Author:      "Flower",
 		FlowVersion: "0.0.1",
-		Inputs: []models.Input{
-			models.Input{
-				Name:        "Test Input",
-				Description: "Testing input",
-				Type:        "string",
-				Required:    true,
-				Default:     "default",
-				Options:     []string{"option1", "option2"},
-				Value:       "value",
-			},
+		Inputs: map[string]interface{}{
+			"test":  "Testing input",
+			"test2": "Testing input 2",
 		},
 		Steps: []models.Step{
 			models.Step{

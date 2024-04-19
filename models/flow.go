@@ -5,9 +5,9 @@ type Flow struct {
 	Description string `json:"description,omitempty"`
 	Version     string `json:"version,omitempty"`
 	Author      string `json:"author,omitempty"`
-
 	FlowVersion string `json:"flow_version"`
 
 	Inputs map[string]interface{} `json:"inputs"`
-	Steps  []Step
+
+	Steps []Step `json:"steps"`
 }
