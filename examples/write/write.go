@@ -24,11 +24,18 @@ func main() {
 		},
 		Steps: []models.Step{
 			{
+				Name:   "Test regex",
+				Action: "core/regex",
+				Inputs: map[string]interface{}{
+					"regex": "(\\d+)",
+					"text":  "The number is 42.",
+				},
+			},
+			{
 				Name:   "Test print",
 				Action: "core/test/print",
-
 				Inputs: map[string]interface{}{
-					"message": "Hello, world!",
+					"message": "The matched number is {{index .matches 0}}",
 				},
 			},
 		},

@@ -43,7 +43,7 @@ func (r *Runtime) Run() error {
 	for _, step := range r.flow.Steps {
 		stepStartTime := time.Now()
 
-		action, ok := actions.GetAction(step.Action)
+		action, ok := r.actions[step.Action]
 
 		if !ok {
 			r.context.Logger.Error("Action %s not found", step.Action)
@@ -54,18 +54,22 @@ func (r *Runtime) Run() error {
 			}
 		}
 
-		err := action.Validate(step.Inputs)
-
+		resolvedInputs, err := resolveInputs(r.context, step.Inputs)
 		if err != nil {
-			r.context.Logger.Error("Validation error for step %s: %v", step.Name, err)
-
+			r.context.Logger.Error("Error resolving inputs for step %s: %v", step.Name, err)
 			return err
 		}
 
-		outputs, err := action.Execute(r.context, step.Inputs)
-
+		err = action.Validate(resolvedInputs)
 		if err != nil {
-			r.context.Logger.Error("Error executing step %s: %v", step.Name)
+			r.context.Logger.Error("Validation error for step %s: %v", step.Name, err)
+			return err
+		}
+
+		outputs, err := action.Execute(r.context, resolvedInputs)
+		if err != nil {
+			r.context.Logger.Error("Error executing step %s: %v", step.Name, err)
+			return err
 		}
 
 		for _, output := range outputs {

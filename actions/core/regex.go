@@ -18,14 +18,16 @@ func (a *RegexAction) GetIdentifier() string {
 func (a *RegexAction) GetInputSchema() []models.Input {
 	return []models.Input{
 		{
-			Name:     "regex",
-			Type:     "string",
-			Required: true,
+			Name:        "regex",
+			Description: "The regular expression to match against the text.",
+			Type:        "string",
+			Required:    true,
 		},
 		{
-			Name:     "text",
-			Type:     "string",
-			Required: true,
+			Name:        "text",
+			Description: "The text to match against the regular expression.",
+			Type:        "string",
+			Required:    true,
 		},
 	}
 }

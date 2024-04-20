@@ -27,6 +27,7 @@ func NewContext(flow *models.Flow) *Context {
 		Inputs:      make(map[string]string),
 		flow:        flow,
 		Logger:      NewDefaultLogger(id.String()),
+		stepOutputs: make(map[string]interface{}),
 	}
 }
 

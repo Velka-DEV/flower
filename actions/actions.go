@@ -7,6 +7,7 @@ import (
 
 var actions = []models.Action{
 	&core.PrintAction{},
+	&core.RegexAction{},
 }
 
 func RegisterAction(action models.Action) error {

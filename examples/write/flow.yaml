@@ -14,7 +14,12 @@ inputs:
     key: value
   test_string: Hello, world!
 steps:
+- name: Test regex
+  action: core/regex
+  inputs:
+    regex: "(\\d+)"
+    text: The number is 42.
 - name: Test print
   action: core/test/print
   inputs:
-    message: Hello, world!
+    message: The matched number is {{index .matches 0}}
