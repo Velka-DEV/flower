@@ -1,7 +1,7 @@
 package engine
 
 import (
-	"flower/models"
+	"flower/internal/models"
 	"github.com/google/uuid"
 	"time"
 )

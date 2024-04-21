@@ -1,18 +1,18 @@
 package actions
 
 import (
-	"flower/actions/core"
-	"flower/models"
+	core2 "flower/internal/actions/core"
+	models2 "flower/internal/models"
 )
 
-var actions = []models.Action{
-	&core.PrintAction{},
-	&core.RegexAction{},
+var actions = []models2.Action{
+	&core2.PrintAction{},
+	&core2.RegexAction{},
 }
 
-func RegisterAction(action models.Action) error {
+func RegisterAction(action models2.Action) error {
 	if _, ok := GetAction(action.GetIdentifier()); ok {
-		return &models.ActionAlreadyRegisteredError{
+		return &models2.ActionAlreadyRegisteredError{
 			Action: action.GetIdentifier(),
 		}
 	}
@@ -22,7 +22,7 @@ func RegisterAction(action models.Action) error {
 	return nil
 }
 
-func RegisterActions(actions []models.Action) error {
+func RegisterActions(actions []models2.Action) error {
 	for _, action := range actions {
 		err := RegisterAction(action)
 
@@ -34,7 +34,7 @@ func RegisterActions(actions []models.Action) error {
 	return nil
 }
 
-func GetAction(identifier string) (models.Action, bool) {
+func GetAction(identifier string) (models2.Action, bool) {
 	for _, action := range actions {
 		if action.GetIdentifier() == identifier {
 			return action, true
@@ -44,8 +44,8 @@ func GetAction(identifier string) (models.Action, bool) {
 	return nil, false
 }
 
-func GetActions() map[string]models.Action {
-	actions := make(map[string]models.Action)
+func GetActions() map[string]models2.Action {
+	actions := make(map[string]models2.Action)
 
 	for _, action := range actions {
 		actions[action.GetIdentifier()] = action

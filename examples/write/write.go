@@ -1,13 +1,13 @@
 package main
 
 import (
-	"flower/models"
+	models2 "flower/internal/models"
 	"github.com/goccy/go-yaml"
 	"os"
 )
 
 func main() {
-	flow := models.Flow{
+	flow := models2.Flow{
 		Name:        "Test Flow",
 		Description: "Testing object to yaml export",
 		Version:     "0.0.1",
@@ -22,7 +22,7 @@ func main() {
 				"key": "value",
 			},
 		},
-		Steps: []models.Step{
+		Steps: []models2.Step{
 			{
 				ID:     "1",
 				Name:   "Test regex",

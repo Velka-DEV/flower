@@ -1,9 +1,5 @@
 package models
 
-type Context interface {
-	SetOutput(stepID, outputName string, value interface{})
-}
-
 type Action interface {
 	GetIdentifier() string
 	GetInputSchema() []Input

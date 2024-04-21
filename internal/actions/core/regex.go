@@ -1,7 +1,7 @@
 package core
 
 import (
-	"flower/models"
+	models2 "flower/internal/models"
 	"fmt"
 	"regexp"
 )
@@ -15,8 +15,8 @@ func (a *RegexAction) GetIdentifier() string {
 	return RegexActionIdentifier
 }
 
-func (a *RegexAction) GetInputSchema() []models.Input {
-	return []models.Input{
+func (a *RegexAction) GetInputSchema() []models2.Input {
+	return []models2.Input{
 		{
 			Name:        "regex",
 			Description: "The regular expression to match against the text.",
@@ -32,8 +32,8 @@ func (a *RegexAction) GetInputSchema() []models.Input {
 	}
 }
 
-func (a *RegexAction) GetOutputSchema() []models.Output {
-	return []models.Output{
+func (a *RegexAction) GetOutputSchema() []models2.Output {
+	return []models2.Output{
 		{
 			Name: "matches",
 			Type: "array",
@@ -59,7 +59,7 @@ func (a *RegexAction) Validate(inputs map[string]interface{}) error {
 	return nil
 }
 
-func (a *RegexAction) Execute(ctx models.Context, inputs map[string]interface{}) ([]models.Output, error) {
+func (a *RegexAction) Execute(ctx models2.Context, inputs map[string]interface{}) ([]models2.Output, error) {
 	regex := inputs["regex"].(string)
 	text := inputs["text"].(string)
 
@@ -76,7 +76,7 @@ func (a *RegexAction) Execute(ctx models.Context, inputs map[string]interface{})
 		}
 	}
 
-	outputs := []models.Output{
+	outputs := []models2.Output{
 		{
 			Name:  "matches",
 			Value: matches,
