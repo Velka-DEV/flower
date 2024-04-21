@@ -1,4 +1,8 @@
 # Flower
+[![Release](https://github.com/Velka-DEV/flower/workflows/Release/badge.svg)](https://github.com/Velka-DEV/flower/actions?query=workflow:"Build")
+[![GitHub release](https://img.shields.io/github/release/Velka-DEV/flower?include_prereleases=&sort=semver&color=blue)](https://github.com/Velka-DEV/flower/releases/)
+[![License](https://img.shields.io/badge/License-GPLv3-blue)](#license)
+[![issues - flower](https://img.shields.io/github/issues/Velka-DEV/flower)](https://github.com/Velka-DEV/flower/issues)
 
 Flower is a powerful and flexible Go library for creating and executing workflows. It provides a simple and intuitive way to define workflows using a declarative YAML syntax and execute them programmatically.
 
