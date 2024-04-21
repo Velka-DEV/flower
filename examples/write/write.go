@@ -2,7 +2,7 @@ package main
 
 import (
 	"flower/models"
-	yaml "github.com/goccy/go-yaml"
+	"github.com/goccy/go-yaml"
 	"os"
 )
 
@@ -24,6 +24,7 @@ func main() {
 		},
 		Steps: []models.Step{
 			{
+				ID:     "1",
 				Name:   "Test regex",
 				Action: "core/regex",
 				Inputs: map[string]interface{}{
@@ -32,6 +33,7 @@ func main() {
 				},
 			},
 			{
+				ID:     "2",
 				Name:   "Test print",
 				Action: "core/test/print",
 				Inputs: map[string]interface{}{

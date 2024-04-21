@@ -26,11 +26,24 @@ func resolveInputs(ctx *Context, inputs map[string]interface{}) (map[string]inte
 	for key, value := range inputs {
 		switch v := value.(type) {
 		case string:
-			rendered, err := renderTemplate(v, ctx.stepOutputs)
+			tmpl, err := template.New("").Parse(v)
 			if err != nil {
 				return nil, err
 			}
-			resolvedInputs[key] = rendered
+
+			var buf bytes.Buffer
+
+			err = tmpl.Execute(&buf, map[string]interface{}{
+				"ctx":    ctx,
+				"steps":  ctx.stepOutputs,
+				"inputs": ctx.Inputs,
+			})
+
+			if err != nil {
+				return nil, err
+			}
+
+			resolvedInputs[key] = buf.String()
 		default:
 			resolvedInputs[key] = v
 		}

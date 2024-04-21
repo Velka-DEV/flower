@@ -1,7 +1,7 @@
 package models
 
 type Context interface {
-	SetOutput(name string, value interface{})
+	SetOutput(stepID, outputName string, value interface{})
 }
 
 type Action interface {

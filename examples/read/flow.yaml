@@ -1,0 +1,27 @@
+name: Test Flow
+description: Testing object to yaml export
+version: 0.0.1
+author: Flower
+flow_version: 0.0.1
+inputs:
+  test_array:
+  - a
+  - b
+  - c
+  test_bool: true
+  test_int: 42
+  test_object:
+    key: value
+  test_string: Hello, world!
+steps:
+- name: Test regex
+  id: step1
+  action: core/regex
+  inputs:
+    regex: "(\\d+)"
+    text: The number is 42.
+- name: Test print
+  id: step2
+  action: core/test/print
+  inputs:
+    message: The matched number is {{index .steps.step1.matches 0}}

@@ -8,12 +8,13 @@ import (
 func main() {
 	flow := models.Flow{
 		Name:        "Test Flow",
-		Description: "Testing simple print message action in a flow",
+		Description: "Testing programmatic print message action in a flow",
 		Version:     "0.0.1",
 		Author:      "Flower",
 		FlowVersion: "0.0.1",
 		Steps: []models.Step{
 			{
+				ID:     "1",
 				Name:   "Test regex",
 				Action: "core/regex",
 				Inputs: map[string]interface{}{
@@ -22,6 +23,7 @@ func main() {
 				},
 			},
 			{
+				ID:     "2",
 				Name:   "Test print",
 				Action: "core/test/print",
 				Inputs: map[string]interface{}{
@@ -35,7 +37,7 @@ func main() {
 
 	runtime.SetFlow(&flow)
 
-	err := runtime.Run()
+	err := runtime.Run(nil)
 
 	if err != nil {
 		panic(err)

@@ -32,8 +32,8 @@ func (r *Runtime) SetActions(actions map[string]models.Action) {
 	r.actions = actions
 }
 
-func (r *Runtime) Run() error {
-	r.context = NewContext(r.flow)
+func (r *Runtime) Run(inputs map[string]interface{}) error {
+	r.context = NewContext(r.flow, inputs)
 	startTime := time.Now()
 
 	defer func() {
@@ -73,7 +73,7 @@ func (r *Runtime) Run() error {
 		}
 
 		for _, output := range outputs {
-			r.context.SetOutput(output.Name, output.Value)
+			r.context.SetOutput(step.ID, output.Name, output.Value)
 		}
 
 		r.context.Logger.Info("Step %s executed in %v", step.Name, time.Since(stepStartTime))

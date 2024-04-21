@@ -1,5 +1,7 @@
 package engine
 
+import "github.com/google/uuid"
+
 type LogLevel int
 
 const (
@@ -10,10 +12,10 @@ const (
 )
 
 type Log struct {
-	Level       LogLevel `json:"level"`
-	Message     string   `json:"message"`
-	Time        string   `json:"time"`
-	ExecutionID string   `json:"execution_id"`
+	Level       LogLevel  `json:"level"`
+	Message     string    `json:"message"`
+	Time        string    `json:"time"`
+	ExecutionID uuid.UUID `json:"execution_id"`
 }
 
 type Logger interface {
@@ -26,10 +28,10 @@ type Logger interface {
 
 type DefaultLogger struct {
 	logs        []Log
-	executionId string
+	executionId uuid.UUID
 }
 
-func NewDefaultLogger(executionId string) *DefaultLogger {
+func NewDefaultLogger(executionId uuid.UUID) *DefaultLogger {
 	return &DefaultLogger{
 		logs:        []Log{},
 		executionId: executionId,

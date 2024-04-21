@@ -1,9 +1,0 @@
-name: Simple flow
-description: A simple flow that does nothing
-version: 1.0
-author: John Doe
-steps:
-  - name: Step 1
-    description: This step does nothing
-    type: shell
-    command: echo "Hello, world!"
