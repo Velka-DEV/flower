@@ -1,14 +1,14 @@
 package engine
 
 import (
-	"flower/actions"
-	"flower/models"
+	"flower/internal/actions"
+	models2 "flower/internal/models"
 	"time"
 )
 
 type Runtime struct {
-	flow    *models.Flow
-	actions map[string]models.Action
+	flow    *models2.Flow
+	actions map[string]models2.Action
 	context *Context
 }
 
@@ -16,7 +16,7 @@ func NewRuntime() *Runtime {
 	return &Runtime{}
 }
 
-func (r *Runtime) SetFlow(flow *models.Flow) {
+func (r *Runtime) SetFlow(flow *models2.Flow) {
 	r.flow = flow
 
 	requiredActions, err := r.getRequiredActions()
@@ -28,7 +28,7 @@ func (r *Runtime) SetFlow(flow *models.Flow) {
 	r.actions = requiredActions
 }
 
-func (r *Runtime) SetActions(actions map[string]models.Action) {
+func (r *Runtime) SetActions(actions map[string]models2.Action) {
 	r.actions = actions
 }
 
@@ -48,7 +48,7 @@ func (r *Runtime) Run(inputs map[string]interface{}) error {
 		if !ok {
 			r.context.Logger.Error("Action %s not found", step.Action)
 
-			return &models.ActionNotFoundError{
+			return &models2.ActionNotFoundError{
 				Action:  step.Action,
 				Message: "Action not found",
 			}
@@ -82,14 +82,14 @@ func (r *Runtime) Run(inputs map[string]interface{}) error {
 	return nil
 }
 
-func (r *Runtime) getRequiredActions() (map[string]models.Action, error) {
-	requiredActions := make(map[string]models.Action)
+func (r *Runtime) getRequiredActions() (map[string]models2.Action, error) {
+	requiredActions := make(map[string]models2.Action)
 
 	for _, step := range r.flow.Steps {
 		action, ok := actions.GetAction(step.Action)
 
 		if !ok {
-			return nil, &models.ActionNotFoundError{
+			return nil, &models2.ActionNotFoundError{
 				Action:  step.Action,
 				Message: "Action not found",
 			}

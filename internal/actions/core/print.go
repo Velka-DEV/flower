@@ -1,13 +1,13 @@
 package core
 
 import (
-	"flower/models"
+	models2 "flower/internal/models"
 	"fmt"
 )
 
 const PrintActionIdentifier = "core/test/print"
 
-var printInputSchema = []models.Input{
+var printInputSchema = []models2.Input{
 	{
 		Name:     "message",
 		Type:     "string",
@@ -22,12 +22,12 @@ func (a *PrintAction) GetIdentifier() string {
 	return PrintActionIdentifier
 }
 
-func (a *PrintAction) GetInputSchema() []models.Input {
+func (a *PrintAction) GetInputSchema() []models2.Input {
 	return printInputSchema
 }
 
-func (a *PrintAction) GetOutputSchema() []models.Output {
-	return []models.Output{}
+func (a *PrintAction) GetOutputSchema() []models2.Output {
+	return []models2.Output{}
 }
 
 func (a *PrintAction) Validate(inputs map[string]interface{}) error {
@@ -44,9 +44,9 @@ func (a *PrintAction) Validate(inputs map[string]interface{}) error {
 	return nil
 }
 
-func (a *PrintAction) Execute(ctx models.Context, inputs map[string]interface{}) ([]models.Output, error) {
+func (a *PrintAction) Execute(ctx models2.Context, inputs map[string]interface{}) ([]models2.Output, error) {
 	message := inputs["message"].(string)
 	fmt.Println(message)
 
-	return []models.Output{}, nil
+	return []models2.Output{}, nil
 }

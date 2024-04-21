@@ -1,8 +1,8 @@
 package main
 
 import (
-	"flower/engine"
-	"flower/models"
+	"flower/internal/engine"
+	"flower/internal/models"
 	"os"
 )
 

@@ -1,18 +1,18 @@
 package main
 
 import (
-	"flower/engine"
-	"flower/models"
+	"flower/internal/engine"
+	models2 "flower/internal/models"
 )
 
 func main() {
-	flow := models.Flow{
+	flow := models2.Flow{
 		Name:        "Test Flow",
 		Description: "Testing programmatic print message action in a flow",
 		Version:     "0.0.1",
 		Author:      "Flower",
 		FlowVersion: "0.0.1",
-		Steps: []models.Step{
+		Steps: []models2.Step{
 			{
 				ID:     "1",
 				Name:   "Test regex",
