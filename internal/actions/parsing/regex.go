@@ -1,18 +1,14 @@
-package core
+package parsing
 
 import (
 	models2 "flower/internal/models"
-	"fmt"
 	"regexp"
 )
 
-const RegexActionIdentifier = "core/regex"
-
-type RegexAction struct {
-}
+type RegexAction struct{}
 
 func (a *RegexAction) GetIdentifier() string {
-	return RegexActionIdentifier
+	return "parsing/regex"
 }
 
 func (a *RegexAction) GetInputSchema() []models2.Input {
@@ -46,16 +42,12 @@ func (a *RegexAction) GetOutputSchema() []models2.Output {
 }
 
 func (a *RegexAction) Validate(inputs map[string]interface{}) error {
-	value, ok := inputs["regex"]
-
-	if !ok {
-		return fmt.Errorf("regex is required")
+	if _, ok := inputs["regex"].(string); !ok {
+		return &models2.InputValidationError{InputName: "regex", Message: "must be a string"}
 	}
-
-	if _, ok := value.(string); !ok {
-		return fmt.Errorf("regex must be a string")
+	if _, ok := inputs["text"].(string); !ok {
+		return &models2.InputValidationError{InputName: "text", Message: "must be a string"}
 	}
-
 	return nil
 }
 
@@ -76,7 +68,7 @@ func (a *RegexAction) Execute(ctx models2.Context, inputs map[string]interface{}
 		}
 	}
 
-	outputs := []models2.Output{
+	return []models2.Output{
 		{
 			Name:  "matches",
 			Value: matches,
@@ -85,7 +77,5 @@ func (a *RegexAction) Execute(ctx models2.Context, inputs map[string]interface{}
 			Name:  "groups",
 			Value: groups,
 		},
-	}
-
-	return outputs, nil
+	}, nil
 }

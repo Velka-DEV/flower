@@ -2,12 +2,13 @@ package actions
 
 import (
 	core2 "flower/internal/actions/core"
+	"flower/internal/actions/parsing"
 	models2 "flower/internal/models"
 )
 
 var actions = []models2.Action{
 	&core2.PrintAction{},
-	&core2.RegexAction{},
+	&parsing.RegexAction{},
 }
 
 func RegisterAction(action models2.Action) error {
