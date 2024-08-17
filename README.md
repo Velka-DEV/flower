@@ -32,7 +32,7 @@ Flower includes a number of built-in actions that can be used in workflows:
 - [ ] `request/sftp`: Perform an SFTP request
 - [ ] `request/ssh`: Perform an SSH request
 - [ ] `request/sql`: Perform an SQL request
-- 
+
 
 - Parsing Actions:
 - [x] `parsing/regex`: Perform a regular expression match
