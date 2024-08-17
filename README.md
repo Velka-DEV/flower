@@ -21,8 +21,24 @@ Flower is a powerful and flexible Go library for creating and executing workflow
 
 Flower includes a number of built-in actions that can be used in workflows:
 
-- `core/test/print`: Print a message to the console
-- `core/regex`: Perform a regular expression match
+- Core Actions:
+- [x] `core/test/print`: Print a message to the console
+
+- Request Actions:
+- [x] `request/http`: Perform an HTTP request
+- [ ] `request/grpc`: Perform a gRPC request
+- [ ] `request/ws`: Perform a WebSocket request
+- [ ] `request/ftp`: Perform an FTP request
+- [ ] `request/sftp`: Perform an SFTP request
+- [ ] `request/ssh`: Perform an SSH request
+- [ ] `request/sql`: Perform an SQL request
+- 
+
+- Parsing Actions:
+- [x] `parsing/regex`: Perform a regular expression match
+- [x] `parsing/xpath`: Extract data from XML using XPath
+- [x] `parsing/jsonpath`: Extract data from JSON using JSONPath
+- [x] `parsing/delimiter`: Split a string using a delimiter
 
 ## Installation
 
