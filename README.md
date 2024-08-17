@@ -1,3 +1,5 @@
+![Flower](https://github.com/Velka-DEV/flower/blob/main/resources/flower.png?raw=true)
+
 # Flower
 [![Build](https://github.com/Velka-DEV/flower/workflows/Build/badge.svg)](https://github.com/Velka-DEV/flower/actions?query=workflow:"Build")
 [![GitHub release](https://img.shields.io/github/release/Velka-DEV/flower?include_prereleases=&sort=semver&color=blue)](https://github.com/Velka-DEV/flower/releases/)
