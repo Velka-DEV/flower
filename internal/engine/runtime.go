@@ -25,6 +25,18 @@ func (r *Runtime) SetActions(actions map[string]models2.Action) {
 	r.actions = actions
 }
 
+func (r *Runtime) GetActions() map[string]models2.Action {
+	return r.actions
+}
+
+func (r *Runtime) GetFlow() *models2.Flow {
+	return r.flow
+}
+
+func (r *Runtime) GetContext() *Context {
+	return r.context
+}
+
 func (r *Runtime) Run(inputs map[string]interface{}) error {
 	if err := r.validateActions(); err != nil {
 		return err

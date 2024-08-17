@@ -1,4 +1,4 @@
-﻿package requests
+﻿package request
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-const HTTPRequestActionIdentifier = "core/http_request"
+const HTTPRequestActionIdentifier = "request/http"
 
 type HTTPRequestAction struct{}
 
