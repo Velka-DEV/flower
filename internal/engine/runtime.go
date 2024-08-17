@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"flower/internal/actions"
 	models2 "flower/internal/models"
 	"time"
 )
@@ -13,7 +14,7 @@ type Runtime struct {
 
 func NewRuntime() *Runtime {
 	return &Runtime{
-		actions: make(map[string]models2.Action),
+		actions: actions.GetActions(),
 	}
 }
 

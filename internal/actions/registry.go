@@ -7,7 +7,7 @@ import (
 	models2 "flower/internal/models"
 )
 
-var actions = []models2.Action{
+var registry = []models2.Action{
 	// Core
 	&core2.PrintAction{},
 
@@ -28,7 +28,7 @@ func RegisterAction(action models2.Action) error {
 		}
 	}
 
-	actions = append(actions, action)
+	registry = append(registry, action)
 
 	return nil
 }
@@ -46,7 +46,7 @@ func RegisterActions(actions []models2.Action) error {
 }
 
 func GetAction(identifier string) (models2.Action, bool) {
-	for _, action := range actions {
+	for _, action := range registry {
 		if action.GetIdentifier() == identifier {
 			return action, true
 		}
@@ -58,7 +58,7 @@ func GetAction(identifier string) (models2.Action, bool) {
 func GetActions() map[string]models2.Action {
 	actions := make(map[string]models2.Action)
 
-	for _, action := range actions {
+	for _, action := range registry {
 		actions[action.GetIdentifier()] = action
 	}
 

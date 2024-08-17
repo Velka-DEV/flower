@@ -1,6 +1,7 @@
 ﻿package engine
 
 import (
+	"flower/internal/actions"
 	"flower/internal/models"
 	"testing"
 )
@@ -29,13 +30,17 @@ func TestRuntime_Run(t *testing.T) {
 		},
 	}
 
+	err := actions.RegisterAction(mockAction)
+	if err != nil {
+		t.Fatalf("Unexpected error: %v", err)
+	}
+
 	// Create a runtime
 	runtime := NewRuntime()
 	runtime.SetFlow(flow)
-	runtime.SetActions(map[string]models.Action{"mock/action": mockAction})
 
 	// Run the flow
-	err := runtime.Run(nil)
+	err = runtime.Run(nil)
 
 	if err != nil {
 		t.Fatalf("Unexpected error: %v", err)
