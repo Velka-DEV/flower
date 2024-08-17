@@ -1,9 +1,9 @@
 ﻿package parsing
 
 import (
-	"encoding/xml"
 	models2 "flower/internal/models"
 	"fmt"
+	"github.com/clbanning/mxj/v2"
 )
 
 type XMLParseAction struct{}
@@ -42,11 +42,13 @@ func (a *XMLParseAction) Validate(inputs map[string]interface{}) error {
 func (a *XMLParseAction) Execute(ctx models2.Context, inputs map[string]interface{}) ([]models2.Output, error) {
 	xmlString := inputs["xml"].(string)
 
-	var result map[string]interface{}
-	err := xml.Unmarshal([]byte(xmlString), &result)
+	mv, err := mxj.NewMapXml([]byte(xmlString))
 	if err != nil {
 		return nil, fmt.Errorf("error parsing XML: %v", err)
 	}
+
+	// Convert mxj.Map to map[string]interface{}
+	result := map[string]interface{}(mv)
 
 	return []models2.Output{
 		{

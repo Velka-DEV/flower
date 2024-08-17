@@ -64,7 +64,11 @@ func (a *XPathAction) Execute(ctx models2.Context, inputs map[string]interface{}
 		return nil, fmt.Errorf("error compiling XPath expression: %v", err)
 	}
 
-	nodes := expr.Evaluate(xmlquery.CreateXPathNavigator(doc)).(xpath.NodeIterator)
+	nodes, ok := expr.Evaluate(xmlquery.CreateXPathNavigator(doc)).(*xpath.NodeIterator)
+	if !ok {
+		return nil, fmt.Errorf("unexpected result type from XPath evaluation")
+	}
+
 	var results []string
 	for nodes.MoveNext() {
 		results = append(results, nodes.Current().Value())

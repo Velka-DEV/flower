@@ -66,6 +66,10 @@ func TestDelimiterParseAction_Execute(t *testing.T) {
 				t.Fatalf("Expected []string, got %T", outputs[0].Value)
 			}
 
+			if len(result) == 0 && len(tt.expected) == 0 {
+				return
+			}
+
 			if !reflect.DeepEqual(result, tt.expected) {
 				t.Errorf("Expected %v, got %v", tt.expected, result)
 			}

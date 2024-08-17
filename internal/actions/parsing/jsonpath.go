@@ -1,11 +1,11 @@
 ﻿package parsing
 
 import (
-	"encoding/json"
 	models2 "flower/internal/models"
 	"fmt"
 	"github.com/ohler55/ojg/jp"
 	"github.com/ohler55/ojg/oj"
+	"strings"
 )
 
 type JSONPathAction struct{}
@@ -54,10 +54,9 @@ func (a *JSONPathAction) Execute(ctx models2.Context, inputs map[string]interfac
 	jsonString := inputs["json"].(string)
 	path := inputs["path"].(string)
 
-	var jsonData interface{}
-	err := json.Unmarshal([]byte(jsonString), &jsonData)
+	jsonData, err := oj.ParseString(jsonString)
 	if err != nil {
-		return nil, fmt.Errorf("error unmarshaling JSON: %v", err)
+		return nil, fmt.Errorf("error parsing JSON: %v", err)
 	}
 
 	expr, err := jp.ParseString(path)
@@ -65,15 +64,27 @@ func (a *JSONPathAction) Execute(ctx models2.Context, inputs map[string]interfac
 		return nil, fmt.Errorf("error parsing JSONPath expression: %v", err)
 	}
 
-	result := expr.Get(oj.JSON(jsonData))
+	result := expr.Get(jsonData)
 	if len(result) == 0 {
 		return []models2.Output{{Name: "result", Value: nil}}, nil
+	}
+
+	var outputValue interface{}
+	if isMultipleItemExpression(path) {
+		outputValue = result
+	} else {
+		outputValue = result[0]
 	}
 
 	return []models2.Output{
 		{
 			Name:  "result",
-			Value: result[0],
+			Value: outputValue,
 		},
 	}, nil
+}
+
+func isMultipleItemExpression(path string) bool {
+	// Check for wildcard or array slice notation
+	return strings.Contains(path, "*") || strings.Contains(path, "[") && strings.Contains(path, ":")
 }

@@ -11,6 +11,7 @@ require (
 )
 
 require (
+	github.com/clbanning/mxj/v2 v2.7.0 // indirect
 	github.com/fatih/color v1.10.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/mattn/go-colorable v0.1.8 // indirect
